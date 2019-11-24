@@ -401,7 +401,7 @@ class ConnectionState:
         emoji = data['emoji']
         emoji_id = utils._get_as_snowflake(emoji, 'id')
         emoji = PartialEmoji(animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
-        raw = RawReactionActionEvent(data, emoji, 'REACTION_ADD')
+        raw = RawReactionActionEvent(data, emoji)
         self.dispatch('raw_reaction_add', raw)
 
         # rich interface here
@@ -427,7 +427,7 @@ class ConnectionState:
         emoji = data['emoji']
         emoji_id = utils._get_as_snowflake(emoji, 'id')
         emoji = PartialEmoji(animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
-        raw = RawReactionActionEvent(data, emoji, 'REACTION_REMOVE')
+        raw = RawReactionActionEvent(data, emoji)
         self.dispatch('raw_reaction_remove', raw)
 
         message = self._get_message(raw.message_id)
