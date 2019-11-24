@@ -400,7 +400,7 @@ class ConnectionState:
     def parse_message_reaction_add(self, data):
         emoji = data['emoji']
         emoji_id = utils._get_as_snowflake(emoji, 'id')
-        emoji = PartialEmoji.with_state(self, animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
+        emoji = PartialEmoji(animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
         raw = RawReactionActionEvent(data, emoji, 'REACTION_ADD')
         self.dispatch('raw_reaction_add', raw)
 
@@ -426,7 +426,7 @@ class ConnectionState:
     def parse_message_reaction_remove(self, data):
         emoji = data['emoji']
         emoji_id = utils._get_as_snowflake(emoji, 'id')
-        emoji = PartialEmoji.with_state(self, animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
+        emoji = PartialEmoji(animated=emoji.get('animated', False), id=emoji_id, name=emoji['name'])
         raw = RawReactionActionEvent(data, emoji, 'REACTION_REMOVE')
         self.dispatch('raw_reaction_remove', raw)
 
